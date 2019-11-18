@@ -1,0 +1,129 @@
+{
+  "bases": [
+    {
+      "key": "peanutButterBase",
+      "name": "Peanut Butter Base",
+      "price": 85,
+      "ingredients": [
+        "peanut butter cup cake"
+      ]
+    },
+    {
+      "key": "lemonBase",
+      "name": "Lemon Bar Base",
+      "price": 64,
+      "ingredients": [
+        "lemon bar"
+      ]
+    },
+    {
+      "key": "chocolateBase",
+      "name": "Chocolate Base",
+      "price": 75,
+      "ingredients": [
+        "chocolate cake"
+      ]
+    },
+    {
+      "key": "vanillaBase",
+      "name": "Vanilla Base",
+      "price": 50,
+      "ingredients": [
+        "vanilla cake"
+      ]
+    },
+    {
+      "key": "redVelvetBase",
+      "name": "Red Velvet Base",
+      "price": 100,
+      "ingredients": [
+        "red velvet cake"
+      ]
+    }
+  ],
+  "frostings": [
+    {
+      "key": "vanillaFrosting",
+      "name": "Vanilla Frosting",
+      "price": 15,
+      "ingredients": [
+        "vanilla frosting"
+      ]
+    },
+    {
+      "key": "espressoButtercreamFrosting",
+      "name": "Espresso Buttercream Frosting",
+      "price": 75,
+      "ingredients": [
+        "buttercream"
+      ]
+    },
+    {
+      "key": "chocolateFrosting",
+      "name": "Chocolate Frosting",
+      "price": 35,
+      "ingredients": [
+        "chocolate frosting"
+      ]
+    },
+    {
+      "key": "redVelvetFrosting",
+      "name": "Red Velvet Frosting",
+      "price": 50,
+      "ingredients": [
+        "red velvet frosting"
+      ]
+    }
+  ],
+  "toppings": [
+    {
+      "key": "sprinkles",
+      "name": "Sprinkles",
+      "price": 10,
+      "ingredients": [
+        "sprinkles"
+      ]
+    },
+    {
+      "key": "coconutFlakes",
+      "name": "Coconut Flakes",
+      "price": 15,
+      "ingredients": [
+        "coconut flakes"
+      ]
+    },
+    {
+      "key": "strawberries",
+      "name": "Strawberries",
+      "price": 15,
+      "ingredients": [
+        "strawberries"
+      ]
+    },
+    {
+      "key": "gummyBears",
+      "name": "Gummy Bears",
+      "price": 25,
+      "ingredients": [
+        "gummy bear"
+      ]
+    },
+    {
+      "key": "chocolateChips",
+      "name": "Chocolate Chips",
+      "price": 50,
+      "ingredients": [
+        "chocolate chips"
+      ]
+    },
+    {
+      "key": "cocoaPowder",
+      "name": "Cocoa Powder",
+      "price": 5,
+      "ingredients": [
+        "cocoa powder"
+      ]
+    }
+  ],
+  "orders": []
+}
