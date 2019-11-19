@@ -42,6 +42,11 @@ function OrderNow() {
     }, [])
 
 
+    function selectBase() {
+        var x = document.getElementById("thebases").value;
+        console.log(x)
+      }
+
     if( bases == []) {
         return (
             <div className="OrderNow">
@@ -53,11 +58,17 @@ function OrderNow() {
             <div>
             <div>
                 <h1>Bases</h1>
-                {bases.map(base => {
-                    return (
-                        <p>{base.name}</p>
-                    )
-                })}
+                <select id="thebases" onChange={selectBase} name="base">
+                    
+                    {bases.map(base => {
+                        return (
+                            // <p>{base.name}</p>
+                            <option value={base.name}>{base.name}</option>
+                        )
+                    })}
+                    
+                </select>
+                
             </div>
             <div>
                 <h1>Frostings</h1>
