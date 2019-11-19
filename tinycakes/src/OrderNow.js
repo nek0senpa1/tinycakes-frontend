@@ -7,6 +7,8 @@ import axios from 'axios';
 function OrderNow() {
 
     const [bases, setBases] = useState([]);
+    const [frostings, setFrostings] = useState([]);
+    const [toppings, setToppings] = useState([]);
 
     useEffect(() => {
         axios.get('http://localhost:4000/cupcakes/bases')
@@ -17,6 +19,26 @@ function OrderNow() {
         .catch( error => {
             console.log(error)
         })
+
+        axios.get('http://localhost:4000/cupcakes/frostings')
+        .then( data => {
+            console.log(data.data.frostings)
+            setFrostings(data.data.frostings)
+        })
+        .catch( error => {
+            console.log(error)
+        })
+
+        axios.get('http://localhost:4000/cupcakes/toppings')
+        .then( data => {
+            console.log(data.data.toppings)
+            setToppings(data.data.toppings)
+        })
+        .catch( error => {
+            console.log(error)
+        })
+
+
     }, [])
 
 
@@ -29,11 +51,30 @@ function OrderNow() {
     } else {
         return (
             <div>
+            <div>
+                <h1>Bases</h1>
                 {bases.map(base => {
                     return (
                         <p>{base.name}</p>
                     )
                 })}
+            </div>
+            <div>
+                <h1>Frostings</h1>
+                {frostings.map(frost => {
+                    return (
+                        <p>{frost.name}</p>
+                    )
+                })}
+            </div>
+            <div>
+                <h1>Toppings</h1>
+                {toppings.map(topp => {
+                    return (
+                        <p>{topp.name}</p>
+                    )
+                })}
+            </div>
             </div>
         )
     }
