@@ -1,6 +1,9 @@
 import React, { useEffect, useState} from 'react';
 import './App.css';
 import { Route, Link } from 'react-router-dom';
+import axios from 'axios';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function PlaceOrder(orderinfo) {
 
@@ -16,9 +19,9 @@ function PlaceOrder(orderinfo) {
             if (orderinfo.cupcake.base === orderinfo.bases[i].key) {
                 console.log('found', orderinfo.cupcake.base)
                 cupcaketotal = cupcaketotal + orderinfo.bases[i].price
-                console.log(cupcaketotal)
+                // console.log(cupcaketotal)
             } else {
-                console.log('base not found', orderinfo.bases[i].name)
+                //console.log('base not found', orderinfo.bases[i].name)
             }
         }
 
@@ -26,9 +29,9 @@ function PlaceOrder(orderinfo) {
             if (orderinfo.cupcake.frosting === orderinfo.frostings[i].key) {
                 console.log('found', orderinfo.cupcake.frosting)
                 cupcaketotal = cupcaketotal + orderinfo.frostings[i].price
-                console.log(cupcaketotal)
+                // console.log(cupcaketotal)
             } else {
-                console.log('frosting not found', orderinfo.frostings[i].name)
+                //console.log('frosting not found', orderinfo.frostings[i].name)
             }
         }
 
@@ -42,9 +45,9 @@ function PlaceOrder(orderinfo) {
                     if (orderinfo.cupcake.toppings[j] === orderinfo.toppings[i].key) {
                         console.log('found', orderinfo.cupcake.toppings[j])
                         cupcaketotal = cupcaketotal + orderinfo.toppings[i].price
-                        console.log(cupcaketotal)
+                        // console.log(cupcaketotal)
                     } else {
-                        console.log('topping not found', orderinfo.toppings[i].name)
+                        //console.log('topping not found', orderinfo.toppings[i].name)
                     }
 
                 }
@@ -54,6 +57,8 @@ function PlaceOrder(orderinfo) {
         
 
     }
+
+    let curDate = Date.now()
 
     const delivery = 150;
 
@@ -71,6 +76,52 @@ function PlaceOrder(orderinfo) {
 
     // unsure if there is tax on delivery fees?  So I didn't factor that in.  Tax only on cuppy cake.
 
+    const [dategood, setDategood] = useState(false)
+
+    const [deldate, setDeldate] = useState(Date.now())
+
+    let ordertosend = {
+        "order": {
+            "cupcakes": [{
+            "base": orderinfo.cupcake.base,
+            "frosting": orderinfo.cupcake.frosting,
+            "toppings": orderinfo.cupcake.toppings
+            }],
+            "delivery_date": deldate
+      }
+    }
+
+    const handleChange = date => {
+        if (date > Date.now(+1) ) {
+            console.log('is later')
+            console.log(date)
+            setDeldate(date);
+            setDategood(true)
+         console.log('deldate',deldate)
+        } else {
+            console.log('is NOT later')
+            setDategood(false)
+        }
+        
+      };
+
+    function submitOrder() {
+        // xhr.js:166 Access to XMLHttpRequest at 'localhost:4000/cupcakes/orders' from origin 'http://localhost:3000' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: http, data, chrome, chrome-extension, https.
+        // this backend has been a bit rough, especially considering I can't change it during this to make it work against CORS errors for local dev...
+        // works fine in PostMan though...
+
+        console.log(ordertosend)
+
+        axios.post('localhost:4000/cupcakes/orders', ordertosend)
+        .then( order => {
+            console.log(order)
+        })
+        .catch( error => {
+            console.log(error)
+        })
+    }
+
+    
 
     return (
         <div className="PlaceOrder">
@@ -80,14 +131,6 @@ function PlaceOrder(orderinfo) {
                 <p>------------------</p>
                 <p>Order Pricing Breakdown</p>
                 <p>------------------</p>
-            </div>
-
-            <div>
-            - cupcake price based on pricing of selected cupcake components
-            - delivery charge of $1.50 per order
-            - sales tax for the state of IL (8.75%)
-            - total without tax
-            - total with tax
             </div>
             
             <div>
@@ -99,8 +142,23 @@ function PlaceOrder(orderinfo) {
             </div>
 
             <div>
-                <button>Submit Order!</button>
+                <br></br>
+                <p>Pick a Delivery Date:</p>
+                <DatePicker
+                    selected={deldate}
+                    onChange={handleChange}
+                />
             </div>
+            <div>
+                {!dategood ?
+                <p>Please pick a Delivery Date After Today...</p>
+                : <div><p>Delivery Date Good, you may place your Order</p>
+                <button onClick={submitOrder}>Submit Order!</button></div>
+                }
+            </div>
+
+            <br></br><br></br>
+            
 
         </div>
     );
