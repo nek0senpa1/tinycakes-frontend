@@ -3,51 +3,87 @@ import './App.css';
 import { Route, Link } from 'react-router-dom';
 import axios from 'axios';
 
-
-function OrderNow() {
-
-    const [bases, setBases] = useState([]);
-    const [frostings, setFrostings] = useState([]);
-    const [toppings, setToppings] = useState([]);
-
-    useEffect(() => {
-        axios.get('http://localhost:4000/cupcakes/bases')
-        .then( data => {
-            console.log(data.data.bases)
-            setBases(data.data.bases)
-        })
-        .catch( error => {
-            console.log(error)
-        })
-
-        axios.get('http://localhost:4000/cupcakes/frostings')
-        .then( data => {
-            console.log(data.data.frostings)
-            setFrostings(data.data.frostings)
-        })
-        .catch( error => {
-            console.log(error)
-        })
-
-        axios.get('http://localhost:4000/cupcakes/toppings')
-        .then( data => {
-            console.log(data.data.toppings)
-            setToppings(data.data.toppings)
-        })
-        .catch( error => {
-            console.log(error)
-        })
+import PlaceOrder from './PlaceOrder';
 
 
-    }, [])
+function OrderNow(props) {
+
+    // const [bases, setBases] = useState([]);
+    // const [frostings, setFrostings] = useState([]);
+    // const [toppings, setToppings] = useState([]);
+
+    // const [cupcake, setCupcake] = useState({base: "", frosting: "", toppings: [] })
+
+    // // const cupcake = {
+    // //     base: "",
+    // //     frosting: "",
+    // //     toppings: []
+    // // }
+
+    // useEffect(() => {
+    //     axios.get('http://localhost:4000/cupcakes/bases')
+    //     .then( data => {
+    //         console.log(data.data.bases)
+    //         setBases(data.data.bases)
+    //     })
+    //     .catch( error => {
+    //         console.log(error)
+    //     })
+
+    //     axios.get('http://localhost:4000/cupcakes/frostings')
+    //     .then( data => {
+    //         console.log(data.data.frostings)
+    //         setFrostings(data.data.frostings)
+    //     })
+    //     .catch( error => {
+    //         console.log(error)
+    //     })
+
+    //     axios.get('http://localhost:4000/cupcakes/toppings')
+    //     .then( data => {
+    //         console.log(data.data.toppings)
+    //         setToppings(data.data.toppings)
+    //     })
+    //     .catch( error => {
+    //         console.log(error)
+    //     })
+
+
+    // }, [])
 
 
     function selectBase() {
         var x = document.getElementById("thebases").value;
-        console.log(x)
-      }
+        props.cupcake.base = x;
+        console.log(props.cupcake)
+    }
 
-    if( bases == []) {
+    function selectFrost() {
+        var x = document.getElementById("thefrost").value;
+        props.cupcake.frosting = x;
+        console.log(props.cupcake)
+    }
+
+    function selectTopp(stuff) {
+        console.log('stuff', stuff)
+        let n = props.cupcake.toppings.includes(stuff)
+        console.log(n)
+        if (n) {
+            for( var i = 0; i < props.cupcake.toppings.length; i++){ 
+                if ( props.cupcake.toppings[i] === stuff) {
+                    props.cupcake.toppings.splice(i, 1); 
+                }
+             }
+        } else {
+            props.cupcake.toppings.push(stuff)
+        }
+        
+        console.log(props.cupcake)
+    }
+
+    
+
+    if( props.bases == []) {
         return (
             <div className="OrderNow">
                 <p>Welcome to TinyCakes Online Order System :)</p>
@@ -56,37 +92,66 @@ function OrderNow() {
     } else {
         return (
             <div>
-            <div>
-                <h1>Bases</h1>
-                <select id="thebases" onChange={selectBase} name="base">
+                <div>
+                    <h1>Bases</h1>
+                    <select id="thebases" onChange={selectBase} name="base">
+                        
+                        {props.bases.map(base => {
+                            return (
+                                // <p>{base.name}</p>
+                                <option value={base.key}>{base.name}</option>
+                            )
+                        })}
+                        
+                    </select>
                     
-                    {bases.map(base => {
-                        return (
-                            // <p>{base.name}</p>
-                            <option value={base.name}>{base.name}</option>
-                        )
-                    })}
+                </div>
+                <div>
+                    <h1>Frostings</h1>
+                    <select id="thefrost" onChange={selectFrost} name="frost">
+                        
+                        {props.frostings.map(frost => {
+                            return (
+                                // <p>{frost.name}</p>
+                                <option value={frost.key}>{frost.name}</option>
+                            )
+                        })}
+                        
+                    </select>
+
+                </div>
+                <div>
+                    <h1>Toppings</h1>
                     
-                </select>
-                
+                    <form id="thetoppings"  name="topp">
+                        {props.toppings.map(topp => {
+                            return (
+                                // <p>{topp.name}</p>
+                                <label>
+                                <input name={topp.name} type="checkbox" value={topp.key} onClick={ event => {selectTopp(topp.key)} } /> {topp.name} <br></br>
+                                </label>
+                            )
+                        })}
+                        
+                    </form>
+                </div>
+
+                <div>
+                    <p>-----------------------</p>
+                    
+                    <button><Link to="/placeorder">Place Order</Link></button>
+
+                    
+                    
+
+                </div>
+
+                {/* <Route path="/placeorder" component={PlaceOrder}/> */}
+                {/* <Route path="ordernow/placeorder" render={ () => <PlaceOrder cupcake={cupcake} /> } /> */}
+
             </div>
-            <div>
-                <h1>Frostings</h1>
-                {frostings.map(frost => {
-                    return (
-                        <p>{frost.name}</p>
-                    )
-                })}
-            </div>
-            <div>
-                <h1>Toppings</h1>
-                {toppings.map(topp => {
-                    return (
-                        <p>{topp.name}</p>
-                    )
-                })}
-            </div>
-            </div>
+            
+
         )
     }
 
