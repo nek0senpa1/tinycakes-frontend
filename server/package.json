@@ -46,7 +46,9 @@
   },
   "homepage": "https://github.com/CarrierDirect/assessment-api#readme",
   "dependencies": {
+    "babel": "^6.23.0",
     "express": "^4.16.3",
+    "global": "^4.4.0",
     "jest": "^23.6.0",
     "lowdb": "^1.0.0",
     "nodemon": "^1.18.4",
@@ -68,6 +70,6 @@
     "babel-preset-env": "^1.7.0",
     "ts-jest": "^23.1.4",
     "tslint": "^5.11.0",
-    "typescript": "^3.0.3"
+    "typescript": "^3.7.2"
   }
 }

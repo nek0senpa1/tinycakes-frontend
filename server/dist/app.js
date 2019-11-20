@@ -12,7 +12,7 @@ const adapter = new FileSync_1.default(process.env.NODE_ENV === "test" ? "test.j
 const db = lowdb_1.default(adapter);
 const app = express_1.default();
 app.use(express_1.default.json());
-db.defaults(Object.assign({}, cupcake_options_1.default, { orders: [] })).write();
+db.defaults(Object.assign(Object.assign({}, cupcake_options_1.default), { orders: [] })).write();
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");

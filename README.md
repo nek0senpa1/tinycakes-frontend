@@ -1,3 +1,7 @@
+# Update Note:
+Several pull requests were automatically made by GitHub/DependaBot to attempt
+to update the backend dependencies.  These have been ignored per the instructions.
+
 # The Sweetest Client
 
 Tinycakes, LLC is a small startup specializing in less-than-truckload cupcake
