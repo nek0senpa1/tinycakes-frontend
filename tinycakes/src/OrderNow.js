@@ -8,49 +8,6 @@ import PlaceOrder from './PlaceOrder';
 
 function OrderNow(props) {
 
-    // const [bases, setBases] = useState([]);
-    // const [frostings, setFrostings] = useState([]);
-    // const [toppings, setToppings] = useState([]);
-
-    // const [cupcake, setCupcake] = useState({base: "", frosting: "", toppings: [] })
-
-    // // const cupcake = {
-    // //     base: "",
-    // //     frosting: "",
-    // //     toppings: []
-    // // }
-
-    // useEffect(() => {
-    //     axios.get('http://localhost:4000/cupcakes/bases')
-    //     .then( data => {
-    //         console.log(data.data.bases)
-    //         setBases(data.data.bases)
-    //     })
-    //     .catch( error => {
-    //         console.log(error)
-    //     })
-
-    //     axios.get('http://localhost:4000/cupcakes/frostings')
-    //     .then( data => {
-    //         console.log(data.data.frostings)
-    //         setFrostings(data.data.frostings)
-    //     })
-    //     .catch( error => {
-    //         console.log(error)
-    //     })
-
-    //     axios.get('http://localhost:4000/cupcakes/toppings')
-    //     .then( data => {
-    //         console.log(data.data.toppings)
-    //         setToppings(data.data.toppings)
-    //     })
-    //     .catch( error => {
-    //         console.log(error)
-    //     })
-
-
-    // }, [])
-
 
     function selectBase() {
         var x = document.getElementById("thebases").value;
