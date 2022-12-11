@@ -47,7 +47,7 @@
   "homepage": "https://github.com/CarrierDirect/assessment-api#readme",
   "dependencies": {
     "babel": "^6.23.0",
-    "express": "^4.16.3",
+    "express": "^4.17.3",
     "global": "^4.4.0",
     "jest": "^23.6.0",
     "lowdb": "^1.0.0",
